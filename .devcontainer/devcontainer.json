@@ -1,0 +1,27 @@
+{
+  "name": "Spin & Rust Hands-On Lab",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {
+      "version": "latest",
+      "targets": "wasm32-wasip2"
+    }
+  },
+  "forwardPorts": ["3000:3000"],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "fermyon.spin-vscode",
+        "tamasfe.even-better-toml"
+      ],
+      "settings": {
+        "window.restoreWindows": "none",
+	      "workbench.startupEditor": "readme",
+        "workbench.readmeUrl": "${workspaceFolder}/INSTRUCTIONS.md"
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup-prebuild.sh",
+  "postAttachCommand": "bash .devcontainer/setup-session.sh"
+}
