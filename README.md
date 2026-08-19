@@ -1,1 +1,1 @@
-# README
+# Lab: Hello Spin - Rust Edition

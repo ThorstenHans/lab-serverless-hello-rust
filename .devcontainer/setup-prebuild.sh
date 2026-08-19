@@ -15,12 +15,11 @@ curl -fsSL "https://github.com/spinframework/spin/releases/download/v${SPIN_VERS
 sudo mv /tmp/spin /usr/local/bin/spin
 sudo chmod +x /usr/local/bin/spin
 
-# Wire session setup into user shell startup (runs reliably in user context)
-echo "==> Wiring session setup hook to ~/.bashrc..."
-cat << 'EOF' >> ~/.bashrc
+echo "==> Syncing Spin templates in user context ($USER)..."
+spin templates install --git https://github.com/spinframework/spin --upgrade
 
-# Run Spin lab initialization once on attach/shell open
-if [ -f "/workspace/.devcontainer/setup-session.sh" ] && [ ! -f "$HOME/.spin_initialized" ]; then
-    bash /workspace/.devcontainer/setup-session.sh
-fi
-EOF
+echo "==> Installing Spin plugins..."
+spin plugins update
+spin plugins install aka --yes
+
+echo "==> Environment ready!"
